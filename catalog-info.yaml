@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: flask-hello-world
+  description: A simple Flask app to demo Backstage catalog
+  tags:
+    - python
+    - flask
+spec:
+  type: service
+  owner: team-a
+  lifecycle: experimental
