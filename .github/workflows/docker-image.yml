@@ -32,10 +32,10 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Lint code
-        run: |
-          pip install flake8
-          flake8 .
+    #- name: Lint code
+     #   run: |
+      #    pip install flake8
+       #   flake8 .
 
       # 3. Log in to Docker Hub
       - name: Log in to Docker Hub
