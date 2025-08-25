@@ -6,6 +6,10 @@ metadata:
   tags:
     - python
     - flask
+  annotations:
+    backstage.io/source-location: url:https://github.com/arunvel1988/backstage-flask-catalog-demo
+    github.com/project-slug: arunvel1988/backstage-flask-catalog-demo
+    github.com/workflows: docker-image.yml   # 👈 This links your GitHub Actions workflow
 spec:
   type: service
   owner: team-a
