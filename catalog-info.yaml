@@ -9,8 +9,11 @@ metadata:
   annotations:
     backstage.io/source-location: url:https://github.com/arunvel1988/backstage-flask-catalog-demo
     github.com/project-slug: arunvel1988/backstage-flask-catalog-demo
-    github.com/workflows: arun
+    github.com/workflows: ''
+
+  #  github.com/workflows: arun
 spec:
-  type: service
+  type: servicegithub.com/workflows: ''
+
   owner: team-a
   lifecycle: experimental
