@@ -46,7 +46,7 @@ jobs:
         with:
           repository: arunvel1988/backstage-flask-catalog-demo-manifests
           path: manifests
-          token: ${{ secrets.GITHUB_PAT }}  # your github_pat_11AHKK4MI0PE4xz...
+          token: ${{ secrets.GITHUB }}  # your github_pat_11AHKK4MI0PE4xz...
 
       - name: Update deployment.yaml image
         run: |
