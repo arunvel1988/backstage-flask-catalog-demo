@@ -9,7 +9,7 @@ metadata:
   annotations:
     backstage.io/source-location: url:https://github.com/arunvel1988/backstage-flask-catalog-demo
     github.com/project-slug: arunvel1988/backstage-flask-catalog-demo
-    github.com/workflows: docker-image
+    github.com/workflows: CI-CD
 spec:
   type: service
   owner: team-a
