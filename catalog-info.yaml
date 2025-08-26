@@ -13,7 +13,5 @@ metadata:
 
   #  github.com/workflows: arun
 spec:
-  type: servicegithub.com/workflows: ''
-
   owner: team-a
   lifecycle: experimental
