@@ -56,7 +56,7 @@ jobs:
           IMAGE=$IMAGE_NAME:$TAG
           echo "Using image: $IMAGE"
       
-          IMAGE=$IMAGE_NAME:$TAG
+          IMAGE=arunvel1988/backstage-demo:latest
           echo "Updating deployment.yaml image: $IMAGE"
           sed -i "s|^\(\s*image:\s*\).*|\1$IMAGE|" manifests/manifests/deployment.yaml
           cat manifests/manifests/deployment.yaml
