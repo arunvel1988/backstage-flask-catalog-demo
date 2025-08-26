@@ -51,8 +51,10 @@ jobs:
       - name: Update deployment.yaml image
         run: |
           IMAGE=$IMAGE_NAME:$TAG
+      
+          IMAGE=$IMAGE_NAME:$TAG
+          echo "Updating deployment.yaml with image: $IMAGE"
           sed -i "s|^\(\s*image:\s*\).*|\1$IMAGE|" manifests/manifests/deployment.yaml
-
           cat manifests/manifests/deployment.yaml
 
       - name: Commit & Push updated manifests
