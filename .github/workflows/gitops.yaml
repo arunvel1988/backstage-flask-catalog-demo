@@ -49,7 +49,10 @@ jobs:
           token: ${{ secrets.GITHUB }}  # your github_pat_11AHKK4MI0PE4xz...
 
       - name: Update deployment.yaml image
+        env:
+          IMAGE: ${{ env.IMAGE }}
         run: |
+        
           IMAGE=$IMAGE_NAME:$TAG
       
           IMAGE=$IMAGE_NAME:$TAG
