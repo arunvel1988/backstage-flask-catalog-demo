@@ -54,6 +54,7 @@ jobs:
         run: |
         
           IMAGE=$IMAGE_NAME:$TAG
+          echo "Using image: $IMAGE"
       
           IMAGE=$IMAGE_NAME:$TAG
           echo "Updating deployment.yaml image: $IMAGE"
