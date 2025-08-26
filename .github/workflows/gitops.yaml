@@ -52,6 +52,7 @@ jobs:
         run: |
           IMAGE=$IMAGE_NAME:$TAG
           sed -i "s|image: .*|image: $IMAGE|" manifests/manifests/deployment.yaml
+          cat manifests/manifests/deployment.yaml
 
       - name: Commit & Push updated manifests
         run: |
