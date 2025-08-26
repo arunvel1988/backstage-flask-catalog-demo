@@ -1,0 +1,63 @@
+name: arun
+
+on:
+  push:
+    branches:
+      - dev
+      - stg
+      - main
+
+jobs:
+  build-and-update-manifests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build & Push Docker image
+        run: |
+          IMAGE_NAME=arunvel1988/backstage-demo
+          BRANCH_NAME=${GITHUB_REF##*/}
+          TAG=${BRANCH_NAME}-${GITHUB_SHA::7}
+          echo "Building image: $IMAGE_NAME:$TAG"
+          docker build -t $IMAGE_NAME:$TAG .
+          docker push $IMAGE_NAME:$TAG
+          echo "IMAGE=$IMAGE_NAME:$TAG" >> $GITHUB_ENV
+
+      - name: Checkout manifests repo
+        uses: actions/checkout@v3
+        with:
+          repository: arunvel1988/backstage-flask-catalog-demo-manifests
+          path: manifests
+          token: ${{ secrets.GITHUB_PAT }}  # your github_pat_11AHKK4MI0PE4xz...
+
+      - name: Update deployment.yaml image
+        run: |
+          IMAGE=$IMAGE_NAME:$TAG
+          sed -i "s|image: .*|image: $IMAGE|" manifests/deployment.yaml
+
+      - name: Commit & Push updated manifests
+        run: |
+          cd manifests
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add deployment.yaml
+          git commit -m "Update image to $IMAGE"
+          git push
