@@ -32,32 +32,31 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build & Push Docker image
+        id: docker
         run: |
           IMAGE_NAME=arunvel1988/backstage-demo
           BRANCH_NAME=${GITHUB_REF##*/}
           TAG=${BRANCH_NAME}-${GITHUB_SHA::7}
-          echo "Building image: $IMAGE_NAME:$TAG"
-          docker build -t $IMAGE_NAME:$TAG .
-          docker push $IMAGE_NAME:$TAG
-          echo "IMAGE=$IMAGE_NAME:$TAG" >> $GITHUB_ENV
+          FULL_IMAGE="$IMAGE_NAME:$TAG"
+
+          echo "Building image: $FULL_IMAGE"
+          docker build -t $FULL_IMAGE .
+          docker push $FULL_IMAGE
+
+          # Set output for later steps
+          echo "::set-output name=image::$FULL_IMAGE"
 
       - name: Checkout manifests repo
         uses: actions/checkout@v3
         with:
           repository: arunvel1988/backstage-flask-catalog-demo-manifests
           path: manifests
-          token: ${{ secrets.GITHUB }}  # your github_pat_11AHKK4MI0PE4xz...
+          token: ${{ secrets.GITHUB }}
 
       - name: Update deployment.yaml image
-        env:
-          IMAGE: ${{ env.IMAGE }}
         run: |
-        
-          IMAGE=$IMAGE_NAME:$TAG
-          echo "Using image: $IMAGE"
-      
-          IMAGE=arunvel1988/backstage-demo:latest
-          echo "Updating deployment.yaml image: $IMAGE"
+          IMAGE=${{ steps.docker.outputs.image }}
+          echo "Updating deployment.yaml to use image: $IMAGE"
           sed -i "s|^\(\s*image:\s*\).*|\1$IMAGE|" manifests/manifests/deployment.yaml
           cat manifests/manifests/deployment.yaml
 
@@ -67,5 +66,5 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add deployment.yaml
-          git commit -m "Update image to $IMAGE"
+          git commit -m "Update image to $IMAGE" || echo "No changes to commit"
           git push
