@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: flask-hello-world-backstage-demo-arun
+  description: A simple Flask app to demo Backstage catalog
+  tags:
+    - python
+    - flask
+    - kubernetes
+  annotations:
+    backstage.io/source-location: url:https://github.com/arunvel1988/backstage-flask-catalog-demo
+    github.com/project-slug: arunvel1988/backstage-flask-catalog-demo
+    github.com/workflows: arun
+    backstage.io/kubernetes-id: flask-hello-world-backstage-demo-arun
+    backstage.io/kubernetes-namespace: default   # change if you use another namespace
+spec:
+  type: service
+  owner: team-a
+  lifecycle: experimental
