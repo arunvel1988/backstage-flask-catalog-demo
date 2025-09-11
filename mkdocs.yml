@@ -4,6 +4,6 @@ nav:
   - Getting Started: getting-started.md
   - API Reference: api.md
 theme:
-  name: material
+  name: readthedocs
 plugins:
   - techdocs-core
