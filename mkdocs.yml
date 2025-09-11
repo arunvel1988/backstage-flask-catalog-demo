@@ -1,5 +1,7 @@
 site_name: Flask Hello World Demo
+docs_dir: docs
 nav:
-  - Home: docs/index.md
+  - Home: index.md
+  - Architecture: architecture.md
 theme:
   name: material
