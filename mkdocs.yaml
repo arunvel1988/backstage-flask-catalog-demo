@@ -1,0 +1,5 @@
+site_name: Flask Hello World Demo
+nav:
+  - Home: docs/index.md
+theme:
+  name: material
