@@ -1,4 +1,4 @@
-site_name: 'recommendation-service-docs'
+site_name: 'flask-hello-world-docs'
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
