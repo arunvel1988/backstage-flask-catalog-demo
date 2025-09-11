@@ -1,6 +1,9 @@
-site_name: Flask Hello World Demo
+site_name: 'recommendation-service-docs'
 nav:
   - Home: index.md
-  - Architecture: architecture.md
+  - Getting Started: getting-started.md
+  - API Reference: api.md
 theme:
-  name: readthedocs   # <-- changed from material
+  name: material
+plugins:
+  - techdocs-core
